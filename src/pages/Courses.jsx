@@ -5,20 +5,49 @@ function Courses () {
   const [courses, setCourses] = useState([])
   // /api/courses to GET all the courses
   useEffect(() => {
-    axios.get('/api/courses').then(response => {
-      setCourses(response.data)
-    })
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:5000/api/courses',
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          },
+          { withCredentials: true }
+        )
+        // console.log('Response from API:', response.data)
+        setCourses(response.data)
+      } catch (error) {
+        console.error('Error fetching courses:', error)
+      }
+    }
+    fetchCourses()
+    return () => {
+      // cleanup
+    }
   }, [])
   return (
     <div>
       <h1 className='text-center text-2xl font-bold text-secondary'>
         Our Courses
       </h1>
+      {
+        // Show a loading spinner while fetching the courses
+        !courses.length && (
+          <div className='flex flex-col justify-center items-center h-40'>
+            <div className='animate-spin rounded-full h-24 w-24 border-t-2 border-b-2 border-primary' />
+            <div>Loading...</div>
+          </div>
+        )
+      }
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-8 py-4'>
-        <CourseCard/>
-        <CourseCard/>
-        <CourseCard/>
-        <CourseCard/>
+        {
+          // Map over the courses and show the course card
+          courses.map(course => (
+            <CourseCard key={course.id} course={course} />
+          ))
+        }
       </div>
     </div>
   )

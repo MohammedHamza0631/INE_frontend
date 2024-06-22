@@ -7,8 +7,19 @@ import {
   Image,
   Button
 } from '@nextui-org/react'
+import { Cloudinary } from '@cloudinary/url-gen'
+import { auto } from '@cloudinary/url-gen/actions/resize'
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity'
+import { AdvancedImage } from '@cloudinary/react'
 
-export default function CourseCard () {
+export default function CourseCard ({ course }) {
+  const cld = new Cloudinary({ cloud: { cloudName: 'di2m3dhc3' } })
+  // Use this sample image or upload your own via the Media Explorer
+  const img = cld
+    .image(`${course.cover}`)
+    .format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
+    .quality('auto')
+    .resize(auto().gravity(autoGravity()).width(500).height(500)) // Transform the image: auto-crop to square aspect_ratio
   return (
     <div>
       <Card
@@ -16,19 +27,17 @@ export default function CourseCard () {
         className='w-full h-[300px] col-span-12 sm:col-span-7'
       >
         <CardHeader className='absolute z-10 top-1 flex-col items-start'>
-          <p className='text-tiny text-white/60 uppercase font-bold'>
-            Your day your way
-          </p>
-          <h4 className='text-white/90 font-medium text-xl'>
-            Your checklist for better sleep
-          </h4>
+          <p className='text-tiny text-white/60 uppercase font-bold'></p>
+          <h4 className='text-white/90 font-medium text-xl'>{course.title}</h4>
         </CardHeader>
-        <Image
+        {/* <Image
           removeWrapper
           alt='Relaxing app background'
           className='z-0 w-full h-full object-cover'
-          src='https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg'
-        />
+          src={course.cover + `.jpeg`}
+        /> */}
+        <AdvancedImage cldImg={img} />
+
         <CardFooter className='absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100'>
           <div className='flex flex-grow gap-2 items-center'>
             <Image
