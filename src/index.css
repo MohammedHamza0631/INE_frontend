@@ -8,8 +8,19 @@
   height: 100%;
   width: 100%;
   background-image: linear-gradient(to right, #ffffff12 1px, transparent 1px),
-                    linear-gradient(to bottom, #ffffff12 1px, transparent 1px);
+    linear-gradient(to bottom, #ffffff12 1px, transparent 1px);
   background-size: 24px 24px;
+  background-color: #000000; /* Black background */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.dot {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-image: radial-gradient(#ffffff25 1px, transparent 1px);
+  background-size: 16px 16px;
   background-color: #000000; /* Black background */
   overflow-y: scroll;
   overflow-x: hidden;

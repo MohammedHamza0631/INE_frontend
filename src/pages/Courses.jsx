@@ -35,7 +35,7 @@ function Courses () {
       {
         // Show a loading spinner while fetching the courses
         !courses.length && (
-          <div className='flex flex-col justify-center items-center h-40'>
+          <div className='flex flex-col justify-center items-center h-30'>
             <div className='animate-spin rounded-full h-24 w-24 border-t-2 border-b-2 border-primary' />
             <div>Loading...</div>
           </div>
