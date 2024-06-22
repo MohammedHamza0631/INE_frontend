@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate, NavLink } from 'react-router-dom'
 import {
   Navbar,
   NavbarBrand,
@@ -10,35 +11,47 @@ import {
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
-  Avatar
+  Avatar,
+  Button
 } from '@nextui-org/react'
 import { AcmeLogo } from './AcmeLogo.jsx'
 import { SearchIcon } from './SearchIcon.jsx'
-
+import ModalForm from './ModalForm.jsx'
+import RegisterForm from './RegisterForm.jsx'
 export default function Navigation () {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState({})
+  const logout = () => {
+    setLoggedIn(false)
+    setUser({})
+    localStorage.removeItem('token')
+    navigate('/')
+  }
+
+  const navigate = useNavigate()
   return (
     <Navbar isBordered>
       <NavbarContent justify='start'>
         <NavbarBrand className='mr-4'>
           <AcmeLogo />
-          <p className='hidden sm:block font-bold text-inherit'>ACME</p>
+          <p className='hidden sm:block font-bold text-inherit'></p>
         </NavbarBrand>
-        <NavbarContent className='hidden sm:flex gap-6'>
+        <NavbarContent className='hidden sm:flex gap-10'>
           <NavbarItem>
-            <Link color='foreground' href='#'>
+            <NavLink color='foreground' to='/'>
               Home
-            </Link>
+            </NavLink>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href='#' aria-current='page' color='secondary'>
-              Courses
-            </Link>
+            <NavLink to='/courses' aria-current='page'>
+              <div className='text-secondary'>Courses</div>
+            </NavLink>
           </NavbarItem>
-          <NavbarItem>
+          {/* <NavbarItem>
             <Link color='foreground' href='#'>
               My Courses
             </Link>
-          </NavbarItem>
+          </NavbarItem> */}
         </NavbarContent>
       </NavbarContent>
 
@@ -56,7 +69,50 @@ export default function Navigation () {
           startContent={<SearchIcon size={18} />}
           type='search'
         />
-        <Dropdown placement='bottom-end'>
+        {loggedIn ? (
+          <Dropdown placement='bottom-end'>
+            <DropdownTrigger>
+              <Avatar
+                isBordered
+                as='button'
+                className='transition-transform'
+                color='secondary'
+                name='Jason Hughes'
+                size='sm'
+                src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+              />
+            </DropdownTrigger>
+            <DropdownMenu aria-label='Profile Actions' variant='flat'>
+              <DropdownItem key='profile' className='h-14 gap-2'>
+                <p className='font-semibold'>Signed in as</p>
+                <p className='font-semibold'>{user.username}</p>
+              </DropdownItem>
+              <DropdownItem key='analytics'>Profile</DropdownItem>
+              <DropdownItem key='courses'>My Courses</DropdownItem>
+              <DropdownItem key='help_and_feedback'>
+                Help & Feedback
+              </DropdownItem>
+              <DropdownItem key='logout' color='danger' onClick={logout}>
+                Log Out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        ) : (
+          <NavbarContent>
+            <NavbarItem>
+              <ModalForm
+                text='Login'
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                setUser={setUser}
+              />
+            </NavbarItem>
+            <NavbarItem>
+              <RegisterForm text='Register' />
+            </NavbarItem>
+          </NavbarContent>
+        )}
+        {/* <Dropdown placement='bottom-end'>
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -73,17 +129,14 @@ export default function Navigation () {
               <p className='font-semibold'>Signed in as</p>
               <p className='font-semibold'>zoey@example.com</p>
             </DropdownItem>
-            <DropdownItem key='settings'>My Settings</DropdownItem>
-            <DropdownItem key='team_settings'>Team Settings</DropdownItem>
-            <DropdownItem key='analytics'>Analytics</DropdownItem>
-            <DropdownItem key='system'>System</DropdownItem>
-            <DropdownItem key='configurations'>Configurations</DropdownItem>
+            <DropdownItem key='analytics'>Profile</DropdownItem>
+            <DropdownItem key='courses'>My Courses</DropdownItem>
             <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem>
             <DropdownItem key='logout' color='danger'>
               Log Out
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
       </NavbarContent>
     </Navbar>
   )
