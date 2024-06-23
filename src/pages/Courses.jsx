@@ -8,7 +8,7 @@ function Courses () {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:5000/api/courses',
+          'https://ine-backend-u216.onrender.com/api/courses',
           {
             headers: {
               'Content-Type': 'application/json'

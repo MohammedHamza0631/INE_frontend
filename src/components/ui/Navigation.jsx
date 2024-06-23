@@ -43,7 +43,7 @@ export default function Navigation () {
   const handleSearch = async e => {
     e.preventDefault()
     const response = await axios.get(
-      `http://localhost:5000/api/courses/search?term=${searchTerm}`,
+      `https://ine-backend-u216.onrender.com/api/courses/search?term=${searchTerm}`,
       {
         headers: {
           'Content-Type': 'application/json'

@@ -27,7 +27,7 @@ export default function RegisterForm ({ text }) {
     e.preventDefault()
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/auth/register',
+        'https://ine-backend-u216.onrender.com/api/auth/register',
         {
           username,
           password

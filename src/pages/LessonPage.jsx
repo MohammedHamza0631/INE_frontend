@@ -8,7 +8,9 @@ function LessonPage () {
   useEffect(() => {
     const fetchLesson = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/lessons/${id}`)
+        const response = await fetch(
+          `https://ine-backend-u216.onrender.com/api/lessons/${id}`
+        )
         const data = await response.json()
         setLesson(data)
       } catch (error) {

@@ -19,7 +19,7 @@ import {
 } from '@nextui-org/react'
 import { MailIcon } from './MailIcon.jsx'
 import { LockIcon } from './LockIcon.jsx'
-import RegisterForm from './RegisterForm.jsx' 
+import RegisterForm from './RegisterForm.jsx'
 export default function ModalForm ({ text }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const navigate = useNavigate()
@@ -30,7 +30,7 @@ export default function ModalForm ({ text }) {
     e.preventDefault()
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/auth/login',
+        'https://ine-backend-u216.onrender.com/api/auth/login',
         { username, password },
         {
           headers: {
