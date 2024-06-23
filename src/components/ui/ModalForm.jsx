@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../features/userSlice.js';
 import {
   Modal,
   ModalContent,
@@ -17,9 +19,10 @@ import {
 import { MailIcon } from './MailIcon.jsx'
 import { LockIcon } from './LockIcon.jsx'
 
-export default function ModalForm ({ text, loggedIn, setLoggedIn, setUser }) {
+export default function ModalForm ({ text }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const navigate = useNavigate()
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const login = async e => {
@@ -51,8 +54,7 @@ export default function ModalForm ({ text, loggedIn, setLoggedIn, setUser }) {
         })
         // Close the modal before going to courses page
         onOpenChange()
-        setUser(userInfo)
-        setLoggedIn(true)
+        dispatch(setUser(userInfo));
         navigate('/courses') // Set redirect to true
       }
     } catch (error) {

@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navigation from './components/ui/Navigation'
-import CourseCard from './components/ui/CourseCard'
+import { useDispatch } from 'react-redux'
 import Home from './pages/Home'
 import Courses from './pages/Courses'
 import CourseDetail from './pages/CourseDetail'
-import Login from './pages/Login'
-import Register from './pages/Register'
 import { Toaster } from 'react-hot-toast'
-import LessonPage from './pages/LessonPage'
+import { login, setUser } from './features/userSlice'
 function App () {
   return (
     <div className='dot'>
@@ -21,9 +19,8 @@ function App () {
             <Route index element={<Home />} />
             <Route path='/courses' element={<Courses />} />
             <Route path='/courses/:id' element={<CourseDetail />} />
-            <Route path="/lessons/:id" element={<LessonPage/>} />
           </Routes>
-          <Toaster/>
+          <Toaster />
         </main>
       </div>
     </div>
