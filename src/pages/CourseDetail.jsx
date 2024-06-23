@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Accordion, AccordionItem} from '@nextui-org/react'
+import { Accordion, AccordionItem } from '@nextui-org/react'
 import { useParams, Link } from 'react-router-dom'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { auto } from '@cloudinary/url-gen/actions/resize'
@@ -9,7 +9,11 @@ function CourseDetail () {
   const { id } = useParams()
   const [courseInfo, setCourseInfo] = useState(null)
   const [cover, setCover] = useState('')
-  
+  const [enrolled, setEnrolled] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem('token') === null ? false : true
+  )
+
   useEffect(() => {
     const fetchCourseInfo = async () => {
       try {
@@ -27,6 +31,31 @@ function CourseDetail () {
       // cleanup
     }
   }, [id])
+
+  useEffect(() => {
+    const checkEnrollment = async () => {
+      try {
+        const token = localStorage.getItem('token')
+        if (token) {
+          const userId = parseJwt(token).userId
+          const response = await fetch(`http://localhost:5000/api/enrollments/status/${userId}/${id}`)
+          const data = await response.json()
+          setEnrolled(data.enrolled)
+        }
+      } catch (error) {
+        console.error('Error checking enrollment status:', error)
+      }
+    }
+    checkEnrollment()
+  }, [id])
+
+  const parseJwt = (token) => {
+    try {
+      return JSON.parse(atob(token.split('.')[1]))
+    } catch (e) {
+      return null
+    }
+  }
   const cld = new Cloudinary({ cloud: { cloudName: 'di2m3dhc3' } })
   // Use this sample image or upload your own via the Media Explorer
   const img = cld
@@ -54,8 +83,10 @@ function CourseDetail () {
           <p>{courseInfo.summary}</p>
         </div>
         <div className='w-full'>
-          <h2 className='text-center text-4xl font-bold text-secondary py-2'>Lessons:</h2>
-          <Accordion variant="shadow">
+          <h2 className='text-center text-4xl font-bold text-secondary py-2'>
+            Lessons:
+          </h2>
+          <Accordion variant='shadow'>
             {courseInfo.lessons.map(lesson => (
               <AccordionItem
                 key={lesson.id}
