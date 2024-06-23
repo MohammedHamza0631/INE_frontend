@@ -29,7 +29,7 @@ function Courses () {
   }, [])
   return (
     <div>
-      <h1 className='text-center text-2xl font-bold text-secondary'>
+      <h1 className='text-center text-5xl font-bold text-secondary'>
         Our Courses
       </h1>
       {

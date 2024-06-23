@@ -61,8 +61,7 @@ function CourseDetail () {
       if (!loggedIn) {
         return navigate('/courses')
       }
-      const user = JSON.parse(localStorage.getItem('user'))
-      // console.log('User:', user)
+  
       const userId = user.id
       await fetch('http://localhost:5000/api/enrollments', {
         method: 'POST',
@@ -137,7 +136,11 @@ function CourseDetail () {
                           frameBorder='0'
                           className='mb-4 border-1 rounded-xl border-gray-200'
                         ></iframe>
-                        <p>{lesson.text_content}</p>
+                        <Textarea
+                          isReadOnly
+                          className='w-full mb-4 mt-2'
+                          defaultValue={lesson.text_content}
+                        />
                       </div>
                     ) : (
                       <div className='mb-4 flex items-center justify-between'>

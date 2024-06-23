@@ -6,7 +6,6 @@ import Home from './pages/Home'
 import Courses from './pages/Courses'
 import CourseDetail from './pages/CourseDetail'
 import { Toaster } from 'react-hot-toast'
-import { login, setUser } from './features/userSlice'
 function App () {
   return (
     <div className='dot'>

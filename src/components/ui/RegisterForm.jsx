@@ -12,7 +12,8 @@ import {
   useDisclosure,
   Checkbox,
   Input,
-  Link
+  Link,
+  Chip
 } from '@nextui-org/react'
 import { MailIcon } from './MailIcon.jsx'
 import { LockIcon } from './LockIcon.jsx'
@@ -50,6 +51,8 @@ export default function RegisterForm ({ text }) {
             color: '#fff'
           }
         })
+        // close model before going to login
+        onOpenChange()
         navigate('/') // Set redirect to true
       }
     } catch (error) {
@@ -67,9 +70,9 @@ export default function RegisterForm ({ text }) {
   // }
   return (
     <>
-      <Button onPress={onOpen} color='secondary' variant='ghost'>
+      <Chip color='secondary' radius='sm' variant='shadow' onClick={onOpen}>
         {text}
-      </Button>
+      </Chip>
       <Modal
         isOpen={isOpen}
         backdrop='blur'

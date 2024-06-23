@@ -33,7 +33,7 @@ export default function Navigation () {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    dispatch(logout())
     navigate('/')
   }
   return (
@@ -92,7 +92,7 @@ export default function Navigation () {
             <DropdownMenu aria-label='Profile Actions' variant='flat'>
               <DropdownItem key='profile' className='h-14 gap-2'>
                 <p className='font-semibold'>Signed in as</p>
-                <p className='font-semibold'>{user}</p>
+                <p className='font-semibold'>{user.username}</p>
               </DropdownItem>
               <DropdownItem key='analytics'>Profile</DropdownItem>
               <DropdownItem key='courses'>My Courses</DropdownItem>
@@ -108,9 +108,6 @@ export default function Navigation () {
           <NavbarContent>
             <NavbarItem>
               <ModalForm text='Login' />
-            </NavbarItem>
-            <NavbarItem>
-              <RegisterForm text='Register' />
             </NavbarItem>
           </NavbarContent>
         )}

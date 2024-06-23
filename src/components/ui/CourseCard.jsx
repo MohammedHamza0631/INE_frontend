@@ -43,27 +43,15 @@ export default function CourseCard ({ course }) {
         </Link>
 
         <CardFooter className='absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100'>
-          <div className='flex flex-grow gap-2 items-center'>
-            <div className='flex flex-col'>
-              <p className='text-tiny text-white/60'>
-                {
-                  //display the tags
-                  course.tags.map((tag, index) => (
-                    <span key={index} className='text-xs text-primary'>
-                      <Chip size='sm' className='gap-4'>
-                        {tag}
-                      </Chip>
-                    </span>
-                  ))
-                }
-              </p>
+          <div className='flex flex-grow gap-2 items-center justify-center'>
+            <div className='flex items-center justify-center gap-4'>
+              {course.tags.map((tag, index) => (
+                <Chip key={index} size='sm' color='primary'>
+                  {tag}
+                </Chip>
+              ))}
             </div>
           </div>
-          <Link to={`/courses/${course.id}`}>
-            <Button radius='full' size='sm' color='primary'>
-              Go to Course
-            </Button>
-          </Link>
         </CardFooter>
       </Card>
     </div>
