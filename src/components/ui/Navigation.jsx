@@ -40,19 +40,6 @@ export default function Navigation () {
     navigate('/')
   }
 
-  const handleSearch = async e => {
-    e.preventDefault()
-    const response = await axios.get(
-      `https://ine-backend-u216.onrender.com/api/courses/search?term=${searchTerm}`,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-    console.log('Response from API:', response.data)
-  }
-
   return (
     <Navbar isBordered>
       <NavbarContent justify='start'>
@@ -80,33 +67,6 @@ export default function Navigation () {
       </NavbarContent>
 
       <NavbarContent as='div' className='items-center' justify='end'>
-        <form onSubmit={handleSearch}>
-          <div className='flex gap-4'>
-            <Input
-              classNames={{
-                base: 'max-w-full sm:max-w-[10rem] h-10',
-                mainWrapper: 'h-full',
-                input: 'text-small',
-                inputWrapper:
-                  'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20'
-              }}
-              placeholder='Type to search...'
-              size='sm'
-              startContent={<SearchIcon size={18} />}
-              type='search'
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-            />
-            <Button
-              size='md'
-              color='secondary'
-              className='cursor-pointer'
-              // onClick={handleSearch}
-            >
-              Search
-            </Button>
-          </div>
-        </form>
         {loggedIn ? (
           <Dropdown placement='bottom-end'>
             <DropdownTrigger>
@@ -136,7 +96,7 @@ export default function Navigation () {
             </DropdownMenu>
           </Dropdown>
         ) : (
-          <NavbarContent>
+          <NavbarContent justify='end'>
             <NavbarItem>
               <ModalForm text='Login' />
             </NavbarItem>

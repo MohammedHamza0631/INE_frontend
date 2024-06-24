@@ -118,12 +118,7 @@ function CourseDetail () {
                   {loggedIn ? (
                     enrolled ? (
                       <div className='flex flex-col items-center justify-center'>
-                        {/* <p className=''>{lesson.text_content}</p>
-                        <Link to={`/lessons/${lesson.id}`} className=''>
-                          <Button color='secondary' variant='ghost'>
-                            View Lesson
-                          </Button>
-                        </Link> */}
+                        
                         <iframe
                           src={`https://player.cloudinary.com/embed/?public_id=${lesson.video_id}&cloud_name=di2m3dhc3&player[posterOptions][transformation][start_offset]=0&player[controls]=true&player[showJumpControls]=true&player[showLogo]=false&player[fluid]=true`}
                           width='640'
@@ -167,9 +162,6 @@ function CourseDetail () {
                     </div>
                   )}
                 </div>
-                {/* <Link to={`/lessons/${lesson.id}`}>
-                  <p className=' text-blue-400'>{lesson.text_content}</p>
-                </Link> */}
               </AccordionItem>
             ))}
           </Accordion>
