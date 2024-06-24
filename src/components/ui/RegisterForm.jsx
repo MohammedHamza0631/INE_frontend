@@ -70,14 +70,14 @@ export default function RegisterForm ({ text }) {
   // }
   return (
     <>
-      <Chip color='secondary' radius='sm' variant='shadow' onClick={onOpen}>
+      <Button color='secondary' radius='sm' variant='ghost' onClick={onOpen}>
         {text}
-      </Chip>
+      </Button>
       <Modal
         isOpen={isOpen}
         backdrop='blur'
         onOpenChange={onOpenChange}
-        placement='top-center'
+        placement='center'
       >
         <ModalContent>
           {onClose => (

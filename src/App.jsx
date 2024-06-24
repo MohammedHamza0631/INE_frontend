@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Courses from './pages/Courses'
 import CourseDetail from './pages/CourseDetail'
 import { Toaster } from 'react-hot-toast'
+import LoginPage from './pages/LoginPage'
 function App () {
   return (
     <div className='dot'>
@@ -16,6 +17,7 @@ function App () {
         <main>
           <Routes>
             <Route index element={<Home />} />
+            <Route path='/loginMobile' element={<LoginPage />} />
             <Route path='/courses' element={<Courses />} />
             <Route path='/courses/:id' element={<CourseDetail />} />
           </Routes>

@@ -15,7 +15,8 @@ import {
   useDisclosure,
   Checkbox,
   Input,
-  Link
+  Link,
+  Divider
 } from '@nextui-org/react'
 import { MailIcon } from './MailIcon.jsx'
 import { LockIcon } from './LockIcon.jsx'
@@ -77,7 +78,7 @@ export default function ModalForm ({ text }) {
         isOpen={isOpen}
         backdrop='blur'
         onOpenChange={onOpenChange}
-        placement='top-center'
+        placement='center'
       >
         <ModalContent>
           {onClose => (
@@ -113,6 +114,7 @@ export default function ModalForm ({ text }) {
                   Log in
                 </Button>
               </ModalFooter>
+              <Divider className='mt-4' />
               <div className='flex  gap-4 items-center justify-center py-2'>
                 Don't have an account? <RegisterForm text='Sign Up' />
               </div>
