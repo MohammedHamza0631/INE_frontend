@@ -40,7 +40,6 @@ export default function ModalForm ({ text }) {
         },
         { withCredentials: true }
       )
-      console.log(response.data)
       if (response.status !== 200) {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Registration Failed')
@@ -61,7 +60,7 @@ export default function ModalForm ({ text }) {
       }
     } catch (error) {
       console.error('Registration Error:', error)
-      toast.error('Registration failed. Please try again.', {
+      toast.error('Invalid Username or Password', {
         style: {
           background: '#333',
           color: '#fff'
@@ -71,14 +70,14 @@ export default function ModalForm ({ text }) {
   }
   return (
     <>
-      <Button onPress={onOpen} color='secondary' variant='ghost'>
+      <Button onClick={onOpen} color='secondary' variant='ghost'>
         {text}
       </Button>
       <Modal
         isOpen={isOpen}
         backdrop='blur'
         onOpenChange={onOpenChange}
-        placement='center'
+        placement='top-center'
       >
         <ModalContent>
           {onClose => (
@@ -107,7 +106,7 @@ export default function ModalForm ({ text }) {
                 />
               </ModalBody>
               <ModalFooter>
-                <Button color='danger' variant='flat' onPress={onClose}>
+                <Button color='danger' variant='flat' onClick={onClose}>
                   Close
                 </Button>
                 <Button color='secondary' onClick={login}>

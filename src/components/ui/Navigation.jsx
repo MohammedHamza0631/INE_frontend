@@ -16,16 +16,12 @@ import {
   Divider
 } from '@nextui-org/react'
 import { AcmeLogo } from './AcmeLogo.jsx'
-import { SearchIcon } from './SearchIcon.jsx'
+import { MenuIcon } from 'lucide-react'
 import ModalForm from './ModalForm.jsx'
-import RegisterForm from './RegisterForm.jsx'
 import { logout } from '../../features/userSlice.js'
-import axios from 'axios'
-import Courses from '../../pages/Courses.jsx'
 export default function Navigation () {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [searchTerm, setSearchTerm] = useState('')
   const { user, loggedIn } = useSelector(state => state.user)
   // const logout = () => {
   //   setLoggedIn(false)
@@ -162,15 +158,7 @@ export default function Navigation () {
             ) : (
               <Dropdown placement='bottom-end'>
                 <DropdownTrigger>
-                  <Avatar
-                    isBordered
-                    as='button'
-                    className='transition-transform'
-                    color='secondary'
-                    name='Jason Hughes'
-                    size='sm'
-                    src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
-                  />
+                  <MenuIcon size={32} />
                 </DropdownTrigger>
                 <DropdownMenu aria-label='Profile Actions' variant='shadow'>
                   <DropdownItem key='home'>

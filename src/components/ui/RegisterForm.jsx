@@ -77,7 +77,7 @@ export default function RegisterForm ({ text }) {
         isOpen={isOpen}
         backdrop='blur'
         onOpenChange={onOpenChange}
-        placement='center'
+        placement='top-center'
       >
         <ModalContent>
           {onClose => (
