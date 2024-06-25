@@ -36,7 +36,7 @@ function Courses () {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchCourses(searchTerm)
-    }, 400) // Delay of 500ms to simulate debounce
+    }, 1000) 
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
