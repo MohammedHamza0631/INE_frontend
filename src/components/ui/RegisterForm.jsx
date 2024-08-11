@@ -27,7 +27,7 @@ export default function RegisterForm ({ text }) {
     e.preventDefault()
     try {
       const response = await axios.post(
-        'https://ine-backend-u216.onrender.com/api/auth/register',
+        'https://ine-backend.vercel.app/api/auth/register',
         {
           username,
           password

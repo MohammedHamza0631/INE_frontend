@@ -31,7 +31,7 @@ export default function ModalForm ({ text }) {
     e.preventDefault()
     try {
       const response = await axios.post(
-        'https://ine-backend-u216.onrender.com/api/auth/login',
+        'https://ine-backend.vercel.app/api/auth/login',
         { username, password },
         {
           headers: {

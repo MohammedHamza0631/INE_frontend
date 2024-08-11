@@ -25,7 +25,7 @@ function CourseDetail () {
       try {
         // Fetch the course details by id
         const response = await fetch(
-          `https://ine-backend-u216.onrender.com/api/courses/${id}`
+          `https://ine-backend.vercel.app/api/courses/${id}`
         )
         const data = await response.json()
         setCourseInfo(data)
@@ -46,7 +46,7 @@ function CourseDetail () {
         if (user && loggedIn) {
           const userId = user.id
           const response = await fetch(
-            `https://ine-backend-u216.onrender.com/api/enrollments/status/${userId}/${id}`
+            `https://ine-backend.vercel.app/api/enrollments/status/${userId}/${id}`
           )
           const data = await response.json()
           setEnrolled(data.enrolled)
@@ -65,7 +65,7 @@ function CourseDetail () {
       }
 
       const userId = user.id
-      await fetch('https://ine-backend-u216.onrender.com/api/enrollments', {
+      await fetch('https://ine-backend.vercel.app/api/enrollments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -118,7 +118,6 @@ function CourseDetail () {
                   {loggedIn ? (
                     enrolled ? (
                       <div className='flex flex-col items-center justify-center'>
-                        
                         <iframe
                           src={`https://player.cloudinary.com/embed/?public_id=${lesson.video_id}&cloud_name=di2m3dhc3&player[posterOptions][transformation][start_offset]=0&player[controls]=true&player[showJumpControls]=true&player[showLogo]=false&player[fluid]=true`}
                           width='640'

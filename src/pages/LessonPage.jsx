@@ -9,7 +9,7 @@ function LessonPage () {
     const fetchLesson = async () => {
       try {
         const response = await fetch(
-          `https://ine-backend-u216.onrender.com/api/lessons/${id}`
+          `https://ine-backend.vercel.app/api/lessons/${id}`
         )
         const data = await response.json()
         setLesson(data)

@@ -14,8 +14,8 @@ function Courses () {
     const controller = new AbortController()
     try {
       const url = term
-        ? `https://ine-backend-u216.onrender.com/api/courses/search?term=${term}`
-        : 'https://ine-backend-u216.onrender.com/api/courses'
+        ? `https://ine-backend.vercel.app/api/courses/search?term=${term}`
+        : 'https://ine-backend.vercel.app/api/courses'
       const response = await axios.get(url, {
         headers: {
           'Content-Type': 'application/json'
