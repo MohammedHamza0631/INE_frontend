@@ -36,7 +36,7 @@ function Courses () {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchCourses(searchTerm)
-    }, 400)
+    }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
