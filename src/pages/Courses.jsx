@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Input, Button } from '@nextui-org/react'
+import { Input } from '@nextui-org/react'
 import { SearchIcon } from '../components/ui/SearchIcon'
 import CourseCard from '../components/ui/CourseCard'
+
 function Courses () {
   const [courses, setCourses] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(false)
 
-  // /api/courses to GET all the courses
   const fetchCourses = async (term = '') => {
     setLoading(true)
     const controller = new AbortController()
@@ -36,7 +36,7 @@ function Courses () {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchCourses(searchTerm)
-    }, 1000) 
+    }, 400)
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchTerm])
@@ -51,44 +51,36 @@ function Courses () {
   }
 
   return (
-    <div>
-      <h1 className='text-center text-5xl font-bold text-secondary'>
-        Our Courses
+    <div className=' min-h-screen py-12 text-gray-100'>
+      <h1 className='text-center text-5xl font-extrabold text-purple-400 mb-8'>
+        Explore Our <span className='text-purple-600'>Courses</span>
       </h1>
-      <form onSubmit={handleSearch}>
-        <div className='flex items-center justify-center mt-4 mb-2 gap-4'>
-          <Input
-            classNames={{
-              base: 'max-w-full px-8 sm:max-w-[51rem] h-10',
-              mainWrapper: 'h-full',
-              input: 'text-small',
-              inputWrapper:
-                'h-full font-normal text-default-500 bg-default-400/20 dark:bg-gray-800 border-white-400 dark:border-primary-500/40 rounded-xl'
-            }}
-            placeholder='Type to search...'
-            size='sm'
-            startContent={<SearchIcon size={18} />}
-            type='search'
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-          {/* <Button
-            size='md'
-            color='secondary'
-            className='cursor-pointer'
-            onClick={handleSearch}
-          >
-            Search
-          </Button> */}
-        </div>
+      <p className='text-center text-lg md:text-xl max-w-2xl mx-auto mb-6 text-gray-400'>
+        Discover the right course for you and take the next step in your
+        learning journey. Search and browse through our collection of top-rated
+        courses.
+      </p>
+      <form onSubmit={handleSearch} className='flex justify-center mb-10'>
+        <Input
+          classNames={{
+            base: 'max-w-full px-8 sm:max-w-[51rem] h-12',
+            inputWrapper:
+              'bg-gray-900 text-white shadow-lg rounded-lg border border-gray-700'
+          }}
+          placeholder='Search for a course...'
+          size='lg'
+          startContent={<SearchIcon size={18} className='text-gray-500' />}
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+        />
       </form>
-      {!courses.length ? (
-        <div className='flex flex-col justify-center items-center h-30'>
-          <div className='animate-spin rounded-full h-24 w-24 border-t-2 border-b-2 border-primary' />
-          <div>Loading...</div>
+      {loading ? (
+        <div className='flex justify-center items-center'>
+          <div className='animate-spin rounded-full h-24 w-24 border-t-4 border-purple-500'></div>
+          <span className='ml-4 text-lg text-gray-400'>Loading...</span>
         </div>
       ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-8 py-4 mx-auto'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6'>
           {courses.map(course => (
             <CourseCard key={course.id} course={course} />
           ))}
